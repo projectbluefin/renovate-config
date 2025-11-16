@@ -1,0 +1,50 @@
+name: Renovate Self-Hosted
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/renovate.yml"
+      - "org-inherited-config.json"
+  schedule:
+    # Every 30 minutes
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      log-level:
+        description: "Set the Renovate log level (default: info)"
+        required: false
+        default: info
+        type: choice
+        options:
+          - info
+          - debug
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Token
+        id: get-token
+        uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2
+        with:
+          app-id: ${{ secrets.RENOVATE_APP_ID }}
+          private-key: ${{ secrets.RENOVATE_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 1
+          token: ${{ steps.get-token.outputs.token }}
+          persist-credentials: false
+
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@fc0e62a8df512bfba579d7c87f37c043c4274874 # v44.0.1
+        env:
+          RENOVATE_DRY_RUN: ${{ github.event_name == 'pull_request' && 'full' }}
+          LOG_LEVEL: ${{ github.event.inputs.log-level || 'info' }}
+        with:
+          token: ${{ steps.get-token.outputs.token }}
+          configurationFile: ./renovate-config.json
