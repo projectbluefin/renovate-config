@@ -3,7 +3,6 @@
   "onboarding": false,
   "platform": "github",
   "autodiscover": true,
-  "autodiscoverFilter": ["projectbluefin/*"],
   "requireConfig": "required",
   "inheritConfig": true,
   "inheritConfigRepoName": "{{parentOrg}}/renovate-config",
