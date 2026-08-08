@@ -5,6 +5,7 @@
         ":semanticCommits"
     ],
     "rebaseWhen": "conflicted",
+    "platformAutomerge": false,
     "vulnerabilityAlerts": {
         "enabled": false
     },
