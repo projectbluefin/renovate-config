@@ -18,7 +18,7 @@ This repository contains the configuration for a self-hosted Renovate bot that a
   - Inherits from this repo's config
   - Requires config in repositories
   
-- **`renovate.json`** - This repo's own Renovate config
+- **`default.json`** - This repo's own Renovate config
 - **`.github/workflows/renovate.yml`** - Self-hosted Renovate workflow (runs every 30 minutes)
 - **`.github/workflows/ci.yml`** - Validates Renovate configuration on PRs
 

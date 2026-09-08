@@ -7,7 +7,7 @@ on:
       - ".github/workflows/renovate.yml"
       - ".github/renovate.json"
       - ".github/renovate.json5"
-      - "renovate.json"
+      - "default.json"
       - "renovate.json5"
       - "org-inherited-config.json"
 
