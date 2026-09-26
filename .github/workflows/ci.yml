@@ -10,6 +10,7 @@ on:
       - "default.json"
       - "renovate.json5"
       - "org-inherited-config.json"
+      - "renovate-config.json"
 
 jobs:
   validate:
@@ -32,3 +33,11 @@ jobs:
         env:
           CONFIG_FILE: 'org-inherited-config.json'
         run: renovate-config-validator --strict ${CONFIG_FILE}
+
+      # The runner's own (global) config. renovate-config-validator treats a
+      # named file as global config, so self-hosted options such as
+      # allowedCommands are checked here rather than rejected as repo config.
+      - name: Validate runner config
+        env:
+          CONFIG_FILE: 'renovate-config.json'
+        run: renovate-config-validator --strict "${CONFIG_FILE}"

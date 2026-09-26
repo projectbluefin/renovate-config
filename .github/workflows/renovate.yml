@@ -7,6 +7,9 @@ on:
     paths:
       - ".github/workflows/renovate.yml"
       - "org-inherited-config.json"
+      # The runner's own config: a dry run is the only check that parses it
+      # the way a scheduled run does.
+      - "renovate-config.json"
   schedule:
     # Every 3 hours
     - cron: "0 */3 * * *"

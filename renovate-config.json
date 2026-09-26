@@ -7,5 +7,15 @@
   "inheritConfig": true,
   "inheritConfigRepoName": "{{parentOrg}}/renovate-config",
   "inheritConfigFileName": "org-inherited-config.json",
-  "inheritConfigStrict": true
+  "inheritConfigStrict": true,
+  "description": [
+    "allowedCommands is the allowlist for repository postUpgradeTasks. With it empty, every task a repository asks for is skipped with 'Post-upgrade task did not match any on allowedCommands list' and the branch is pushed half-updated. Each entry is a regex anchored to one literal command; the command runs from the repository checkout with the runner's user, so an entry means trusting that repository's writers with this runner. See https://docs.renovatebot.com/security-and-permissions/#trusting-repository-developers."
+  ],
+  "allowedCommands": [
+    "^node scripts/update-omp-pins\\.mjs$",
+    "^node scripts/update-gh-pins\\.mjs$",
+    "^node scripts/update-node-pins\\.mjs$",
+    "^node scripts/update-tmux-pins\\.mjs$",
+    "^node scripts/update-requirements-ci-hashes\\.mjs$"
+  ]
 }
