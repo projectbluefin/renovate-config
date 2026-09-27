@@ -9,13 +9,19 @@
   "inheritConfigFileName": "org-inherited-config.json",
   "inheritConfigStrict": true,
   "description": [
-    "allowedCommands is the allowlist for repository postUpgradeTasks. With it empty, every task a repository asks for is skipped with 'Post-upgrade task did not match any on allowedCommands list' and the branch is pushed half-updated. Each entry is a regex anchored to one literal command; the command runs from the repository checkout with the runner's user, so an entry means trusting that repository's writers with this runner. See https://docs.renovatebot.com/security-and-permissions/#trusting-repository-developers."
+    "allowedCommands is the allowlist for repository postUpgradeTasks. It is set only inside a repositories[] entry, never at the top level, so it applies to that one repository: every other autodiscovered repository keeps the default empty list and runs no commands. An autodiscovered repository that matches a repositories[] entry takes that entry's settings (see https://docs.renovatebot.com/self-hosted-configuration/#repositories).",
+    "An entry runs that repository's own code (whatever its scripts contain on the branch being updated) from Renovate's checkout, whose git remote carries this runner's org-wide token. Adding a repository here means trusting everyone who can merge to it with that token. See https://docs.renovatebot.com/security-and-permissions/#trusting-repository-developers."
   ],
-  "allowedCommands": [
-    "^node scripts/update-omp-pins\\.mjs$",
-    "^node scripts/update-gh-pins\\.mjs$",
-    "^node scripts/update-node-pins\\.mjs$",
-    "^node scripts/update-tmux-pins\\.mjs$",
-    "^node scripts/update-requirements-ci-hashes\\.mjs$"
+  "repositories": [
+    {
+      "repository": "projectbluefin/contribute",
+      "allowedCommands": [
+        "^node scripts/update-omp-pins\\.mjs$",
+        "^node scripts/update-gh-pins\\.mjs$",
+        "^node scripts/update-node-pins\\.mjs$",
+        "^node scripts/update-tmux-pins\\.mjs$",
+        "^node scripts/update-requirements-ci-hashes\\.mjs$"
+      ]
+    }
   ]
 }

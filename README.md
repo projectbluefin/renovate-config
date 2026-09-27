@@ -17,7 +17,7 @@ This repository contains the configuration for a self-hosted Renovate bot that a
   - Autodiscovery for `projectbluefin/*` repositories
   - Inherits from this repo's config
   - Requires config in repositories
-  - `allowedCommands`: the allowlist of repository `postUpgradeTasks` this runner may execute, one anchored regex per literal command (see [Trusting Repository Developers](https://docs.renovatebot.com/security-and-permissions/#trusting-repository-developers))
+  - `repositories`: per-repository overrides. `projectbluefin/contribute` gets an `allowedCommands` list, one anchored regex per literal `postUpgradeTasks` command; no other repository gets one, so the runner executes no commands for them. An entry trusts that repository's writers with the runner's org-wide token (see [Trusting Repository Developers](https://docs.renovatebot.com/security-and-permissions/#trusting-repository-developers))
   
 - **`default.json`** - This repo's own Renovate config
 - **`.github/workflows/renovate.yml`** - Self-hosted Renovate workflow (runs every 30 minutes)
