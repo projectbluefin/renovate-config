@@ -42,8 +42,7 @@
             "groupName": "github-actions (non-major)",
             "automerge": true,
             "automergeType": "pr",
-            "automergeStrategy": "squash",
-            "labels": ["chore/deps", "automerge"]
+            "automergeStrategy": "squash"
         },
         {
             "description": ["Group all projectbluefin/actions SHA updates into one atomic PR"],
@@ -52,8 +51,7 @@
             "groupName": "projectbluefin/actions",
             "automerge": true,
             "automergeType": "pr",
-            "automergeStrategy": "squash",
-            "labels": ["chore/deps", "automerge"]
+            "automergeStrategy": "squash"
         }
     ]
 }
