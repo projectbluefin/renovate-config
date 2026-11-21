@@ -54,13 +54,15 @@
             "automergeStrategy": "squash"
         },
         {
-            "description": ["Third-party GitHub Actions wait three days after release before Renovate opens the update, so a hijacked or broken release has time to be noticed and pulled. First-party projectbluefin/** actions are our own code and stay immediate. This only adds the wait: grouping and automerge are unchanged."],
+            "description": ["Third-party GitHub Actions wait three days after release before Renovate opens the update, so a hijacked or broken release has time to be noticed and pulled. First-party projectbluefin/** actions are our own code and stay immediate. This only adds the wait: grouping and automerge are unchanged. Only the repos the projectbluefin hive manages, for now."],
+            "matchRepositories": ["projectbluefin/actions", "projectbluefin/bluefin-bling", "projectbluefin/bluefin-report", "projectbluefin/bonedigger", "projectbluefin/chairlift", "projectbluefin/common", "projectbluefin/dakota-iso", "projectbluefin/documentation", "projectbluefin/finpilot", "projectbluefin/fsdk-containers", "projectbluefin/ghostscript-printer-app", "projectbluefin/gutenprint-printer-app", "projectbluefin/homebrew-tap", "projectbluefin/hplip-printer-app", "projectbluefin/ps-printer-app", "projectbluefin/server", "projectbluefin/testsuite", "projectbluefin/utah", "projectbluefin/utah-packages", "projectbluefin/website"],
             "matchManagers": ["github-actions"],
             "matchPackageNames": ["!projectbluefin/**"],
             "minimumReleaseAge": "3 days"
         },
         {
-            "description": ["A major update always waits for a person. Renovate doesn't automerge it, and the needs-owner-merge label stops the hive from merging it too: automerge false alone only stops Renovate, and the hive merges trusted-bot PRs itself. Never use hold, which merges as soon as someone removes it."],
+            "description": ["A major update always waits for a person. Renovate doesn't automerge it, and the needs-owner-merge label stops the hive from merging it too: automerge false alone only stops Renovate, and the hive merges trusted-bot PRs itself. Never use hold, which merges as soon as someone removes it. Only the repos the projectbluefin hive manages, for now."],
+            "matchRepositories": ["projectbluefin/actions", "projectbluefin/bluefin-bling", "projectbluefin/bluefin-report", "projectbluefin/bonedigger", "projectbluefin/chairlift", "projectbluefin/common", "projectbluefin/dakota-iso", "projectbluefin/documentation", "projectbluefin/finpilot", "projectbluefin/fsdk-containers", "projectbluefin/ghostscript-printer-app", "projectbluefin/gutenprint-printer-app", "projectbluefin/homebrew-tap", "projectbluefin/hplip-printer-app", "projectbluefin/ps-printer-app", "projectbluefin/server", "projectbluefin/testsuite", "projectbluefin/utah", "projectbluefin/utah-packages", "projectbluefin/website"],
             "matchUpdateTypes": ["major"],
             "automerge": false,
             "addLabels": ["needs-owner-merge"]
