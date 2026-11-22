@@ -19,14 +19,15 @@ This repository contains the configuration for a self-hosted Renovate bot that a
   - Requires config in repositories
   - `repositories`: per-repository overrides. `projectbluefin/contribute` gets an `allowedCommands` list, one anchored regex per literal `postUpgradeTasks` command; no other repository gets one, so the runner executes no commands for them. An entry trusts that repository's writers with the runner's org-wide token (see [Trusting Repository Developers](https://docs.renovatebot.com/security-and-permissions/#trusting-repository-developers))
   
-- **`default.json`** - This repo's own Renovate config
-- **`.github/workflows/renovate.yml`** - Self-hosted Renovate workflow (runs every 30 minutes)
+- **`default.json`** - The org's default preset, served to any repo that extends `local>projectbluefin/renovate-config`; wraps `config:recommended`
+- **`renovate.json`** - This repo's own Renovate config (dependency updates for renovate-config itself)
+- **`.github/workflows/renovate.yml`** - Self-hosted Renovate workflow (runs every 3 hours)
 - **`.github/workflows/ci.yml`** - Validates Renovate configuration on PRs
 
 ## How It Works
 
 The self-hosted Renovate bot:
-1. Runs every 30 minutes via GitHub Actions
+1. Runs every 3 hours via GitHub Actions
 2. Uses a GitHub App for authentication (`RENOVATE_APP_ID` and `RENOVATE_PRIVATE_KEY` secrets)
 3. Autodiscovers all `projectbluefin/*` repositories
 4. Creates PRs for dependency updates based on org-wide configuration
@@ -53,15 +54,17 @@ To enable the self-hosted Renovate bot, you need:
 
 ## Usage in Repositories
 
-Repositories can inherit the org configuration by adding to their `.github/renovate.json5`:
+Org-wide rules in `org-inherited-config.json` are inherited automatically by every repository via Renovate's `inheritConfig` setting — no per-repo `extends` is needed for the org rules.
+
+A repository still needs its own config file (`renovate.json` or `.github/renovate.json5`), since `requireConfig` is `"required"`. To also get the org's `config:recommended`-based default base, it can extend the default preset:
 
 ```json
 {
-  "extends": ["github>projectbluefin/renovate-config:org-inherited-config"]
+  "extends": ["local>projectbluefin/renovate-config"]
 }
 ```
 
-Or simply rely on autodiscovery if they don't need custom overrides.
+`local>projectbluefin/renovate-config` resolves to `default.json`; the named `org-inherited-config` preset is `local>projectbluefin/renovate-config:org-inherited-config`.
 
 ## Testing
 
