@@ -66,6 +66,11 @@
             "matchUpdateTypes": ["major"],
             "automerge": false,
             "addLabels": ["needs-owner-merge"]
+        },
+        {
+            "description": ["Label every Renovate PR hive-review, the projectbluefin hive's write-back opt-in label. Without it the hive may not write to these PRs, so a red update is never adopted and fixed, and nobody is told (fsdk-containers#570). With it the hive can adopt a red update, re-run a flaky check, tick the rebase box and post its status. It does not start a review, and the hive never updates a Renovate branch itself. Only the repos the projectbluefin hive manages."],
+            "matchRepositories": ["projectbluefin/actions", "projectbluefin/bluefin-bling", "projectbluefin/bluefin-report", "projectbluefin/bonedigger", "projectbluefin/chairlift", "projectbluefin/common", "projectbluefin/dakota-iso", "projectbluefin/documentation", "projectbluefin/finpilot", "projectbluefin/fsdk-containers", "projectbluefin/ghostscript-printer-app", "projectbluefin/gutenprint-printer-app", "projectbluefin/homebrew-tap", "projectbluefin/hplip-printer-app", "projectbluefin/ps-printer-app", "projectbluefin/server", "projectbluefin/testsuite", "projectbluefin/utah", "projectbluefin/utah-packages", "projectbluefin/website"],
+            "addLabels": ["hive-review"]
         }
     ]
 }
