@@ -32,7 +32,7 @@ jobs:
       - name: Validate Renovate config
         env:
           CONFIG_FILE: 'org-inherited-config.json'
-        run: renovate-config-validator --strict ${CONFIG_FILE}
+        run: renovate-config-validator --strict "${CONFIG_FILE}"
 
       # The runner's own (global) config. renovate-config-validator treats a
       # named file as global config, so self-hosted options such as
